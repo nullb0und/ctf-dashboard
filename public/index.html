@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#0d0e10">
+    <title>ctf/board · Team tasks</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <header class="app-header">
+      <h1 class="brand">ctf/board</h1>
+      <div class="header-progress" aria-label="Team progress">
+        <div class="segments" id="segments" aria-hidden="true"></div>
+        <span class="progress-copy">
+          <span id="done-total">0</span>/<span id="total">0</span> done
+          · <span id="in-progress-count">0</span> wip
+          · <span id="todo-count">0</span> todo
+        </span>
+      </div>
+      <div class="user">
+        you: <strong id="identity">…</strong>
+        <button class="text-link" id="change-nickname">change</button>
+      </div>
+    </header>
+
+    <main>
+      <div class="toolbar" role="search">
+        <div class="search-wrap">
+          <input class="search" id="search" type="search" placeholder="filter tasks…" autocomplete="off" aria-label="Filter tasks">
+          <span class="keycap" aria-hidden="true">/</span>
+        </div>
+        <div class="filters" role="group" aria-label="Task filters">
+          <button class="filter" data-status-filter="all" aria-pressed="true">[ALL]</button>
+          <button class="filter" data-status-filter="todo" aria-pressed="false">[TODO]</button>
+          <button class="filter" data-status-filter="in_progress" aria-pressed="false">[WIP]</button>
+          <button class="filter" data-status-filter="done" aria-pressed="false">[DONE]</button>
+          <button class="filter mine-filter" id="only-mine" aria-pressed="false">[ONLY MINE]</button>
+        </div>
+        <span class="toolbar-spacer"></span>
+        <div class="import-actions">
+          <button class="import-button" id="import">[import xml]</button>
+          <button class="import-button replace-button" id="replace">[replace all]</button>
+          <input id="xml-file" type="file" accept=".xml,text/xml,application/xml" hidden>
+        </div>
+      </div>
+
+      <div id="notice" class="notice" role="status" aria-live="polite" hidden></div>
+      <div class="status-line">
+        <span class="activity">
+          sync <time id="last-sync">…</time>
+          · <span id="results">loading tasks…</span>
+          <span class="updated-copy"> · updated <time id="last-updated">—</time></span>
+        </span>
+        <span id="connection" class="connection" role="status"><span id="connection-label">connecting…</span></span>
+      </div>
+      <div id="tasks" aria-label="Challenges by category"></div>
+      <footer class="footer">drop an XML file anywhere to merge · updates every 3s · <kbd>/</kbd> to search</footer>
+    </main>
+
+    <div id="drop-overlay" class="drop" hidden>
+      <div>
+        <strong>[drop xml to import]</strong>
+        <p>merge challenges · keep your team's progress</p>
+      </div>
+    </div>
+
+    <dialog class="login-dialog" id="nickname-dialog" aria-labelledby="nickname-heading">
+      <form class="login-form" id="nickname-form">
+        <h2 class="login-title" id="nickname-heading">ctf/board · identify yourself</h2>
+        <div class="login-line">
+          <label for="nickname-input">nick:</label>
+          <input class="login-input" id="nickname-input" minlength="2" maxlength="20" required autocomplete="nickname" placeholder="your nickname" aria-describedby="nickname-help nickname-error">
+          <button type="submit" class="enter-button">[enter]</button>
+        </div>
+        <p class="login-help" id="nickname-help">2–20 characters · saved on this device</p>
+        <p id="nickname-error" class="field-error" hidden></p>
+        <button type="button" id="nickname-cancel" class="text-link cancel-button" hidden>[cancel]</button>
+      </form>
+    </dialog>
+    <script src="/app.js" defer></script>
+  </body>
+</html>

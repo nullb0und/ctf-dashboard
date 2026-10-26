@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ctf xmlns:c="urn:ctf">
+  <round>
+    <task title="Cookie monster" category="Web" />
+    <task>
+      <title>Hidden message</title>
+      <category>Crypto</category>
+    </task>
+    <task category="Forensics"><title>Memory lane</title></task>
+    <c:task c:title="Packet party" c:category="Forensics" />
+  </round>
+</ctf>

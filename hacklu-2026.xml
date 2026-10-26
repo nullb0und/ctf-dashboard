@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tasks event="Hack.lu CTF 2026" source="https://flu.xxx/challenges">
+  <task>
+    <title>M&amp;A</title>
+    <category>active directory</category>
+  </task>
+  <task>
+    <title>Technical Debt</title>
+    <category>active directory</category>
+  </task>
+  <task>
+    <title>LinkedInspirator</title>
+    <category>crypto</category>
+  </task>
+  <task>
+    <title>Lauschangriff</title>
+    <category>crypto</category>
+  </task>
+  <task>
+    <title>kurl</title>
+    <category>misc</category>
+  </task>
+  <task>
+    <title>CEOnnect Four</title>
+    <category>misc</category>
+  </task>
+  <task>
+    <title>uushell</title>
+    <category>misc</category>
+  </task>
+  <task>
+    <title>doppelflip</title>
+    <category>misc</category>
+  </task>
+  <task>
+    <title>nodejailjailjail</title>
+    <category>misc</category>
+  </task>
+  <task>
+    <title>Singlepane</title>
+    <category>misc</category>
+  </task>
+  <task>
+    <title>Challenge Deployment</title>
+    <category>misc</category>
+  </task>
+  <task>
+    <title>John</title>
+    <category>misc</category>
+  </task>
+  <task>
+    <title>Remote DJ</title>
+    <category>misc</category>
+  </task>
+  <task>
+    <title>UNRㅌㅌL</title>
+    <category>misc</category>
+  </task>
+  <task>
+    <title>Challenge Deployment 2</title>
+    <category>misc</category>
+  </task>
+  <task>
+    <title>UNRㅌㅌL (repair)</title>
+    <category>misc</category>
+  </task>
+  <task>
+    <title>turbo-malloc</title>
+    <category>pwn</category>
+  </task>
+  <task>
+    <title>Declassifier</title>
+    <category>pwn</category>
+  </task>
+  <task>
+    <title>Xtensable Echoserver</title>
+    <category>pwn</category>
+  </task>
+  <task>
+    <title>CHIP</title>
+    <category>pwn</category>
+  </task>
+  <task>
+    <title>agileKV</title>
+    <category>pwn</category>
+  </task>
+  <task>
+    <title>v67</title>
+    <category>pwn</category>
+  </task>
+  <task>
+    <title>Nuclear</title>
+    <category>pwn</category>
+  </task>
+  <task>
+    <title>VeryMildHidden</title>
+    <category>rev</category>
+  </task>
+  <task>
+    <title>LIcense Validation Suite</title>
+    <category>rev</category>
+  </task>
+  <task>
+    <title>Every 7x7 Nonoflag</title>
+    <category>rev</category>
+  </task>
+  <task>
+    <title>IL2FLAG</title>
+    <category>rev</category>
+  </task>
+  <task>
+    <title>Vaulty</title>
+    <category>rev</category>
+  </task>
+  <task>
+    <title>Selene.Protocol.v1.1-LNR</title>
+    <category>rev</category>
+  </task>
+  <task>
+    <title>flag_check_appliance_v2_FINAL.raw</title>
+    <category>rev</category>
+  </task>
+  <task>
+    <title>talk to the locals</title>
+    <category>web</category>
+  </task>
+  <task>
+    <title>Postbox</title>
+    <category>web</category>
+  </task>
+  <task>
+    <title>Widgetboard</title>
+    <category>web</category>
+  </task>
+  <task>
+    <title>what a great week to host a ctf</title>
+    <category>web</category>
+  </task>
+  <task>
+    <title>how2database</title>
+    <category>web</category>
+  </task>
+</tasks>
