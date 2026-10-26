@@ -4,6 +4,7 @@
 const http = require('node:http');
 const fs = require('node:fs');
 const DATA_FILE = __dirname + '/data.json';
+const PORT = Number(process.env.PORT || 8000);
 // Serve only these frontend files; storage and backend source stay private.
 const STATIC_FILES = new Map([
   ['/', ['index.html', 'text/html; charset=utf-8']],
@@ -119,19 +120,21 @@ function send(res, status, data, type = 'application/json; charset=utf-8') {
     'X-Content-Type-Options': 'nosniff',
     'Referrer-Policy': 'same-origin',
   });
-  res.end(body);
+  // HEAD reports the GET representation's headers without sending its body.
+  res.end(res.req.method === 'HEAD' ? undefined : body);
 }
 
 async function route(req, res) {
   try {
     const pathname = new URL(req.url, 'http://localhost').pathname;
-    if (req.method === 'GET' && STATIC_FILES.has(pathname)) {
+    const readRequest = req.method === 'GET' || req.method === 'HEAD';
+    if (readRequest && STATIC_FILES.has(pathname)) {
       const [filename, type] = STATIC_FILES.get(pathname);
       const content = await fs.promises.readFile(__dirname + '/public/' + filename);
       return send(res, 200, content, type);
     }
-    if (req.method === 'GET' && pathname === '/favicon.ico') { res.writeHead(204); return res.end(); }
-    if (req.method === 'GET' && pathname === '/api/tasks') return send(res, 200, state);
+    if (readRequest && pathname === '/favicon.ico') { res.writeHead(204); return res.end(); }
+    if (readRequest && pathname === '/api/tasks') return send(res, 200, state);
     if (req.method === 'POST' && pathname === '/api/import') {
       const body = await readJSON(req);
       const mode = body.mode === undefined ? 'merge' : body.mode;
@@ -189,6 +192,9 @@ async function route(req, res) {
 }
 
 async function main() {
+  if (!Number.isInteger(PORT) || PORT < 0 || PORT > 65535) {
+    throw new Error('PORT must be an integer between 0 and 65535.');
+  }
   try {
     state = validateStored(JSON.parse(await fs.promises.readFile(DATA_FILE, 'utf8')));
   } catch (error) {
@@ -203,9 +209,10 @@ async function main() {
   server.requestTimeout = 30000;
   server.headersTimeout = 15000;
   server.on('error', error => { console.error('Server error:', error.message); process.exitCode = 1; });
-  server.listen(8000, '0.0.0.0', () => {
-    console.log('Flagboard: http://localhost:8000');
-    console.log('LAN/VPN: http://<this-computer-IP>:8000');
+  server.listen(PORT, '0.0.0.0', () => {
+    const port = server.address().port;
+    console.log('Flagboard: http://localhost:' + port);
+    console.log('LAN/VPN: http://<this-computer-IP>:' + port);
     console.log('Storage: ' + DATA_FILE);
     console.log('Run only one server process per data.json. Press Ctrl+C to stop.');
   });

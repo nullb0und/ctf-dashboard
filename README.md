@@ -22,6 +22,8 @@ node server.js
 
 Open **http://localhost:8000**. Teammates use **http://YOUR-LAN-OR-VPN-IP:8000**. The server listens on `0.0.0.0:8000`; allow incoming TCP port 8000 in your firewall if needed. Stop with Ctrl+C.
 
+Set the `PORT` environment variable to override the default port (for example, on Render). `PORT=0` asks the OS to assign a free port, which the test suite uses.
+
 `data.json` is created automatically beside `server.js`, regardless of the working directory. Updates are serialized, flushed to `data.json.tmp`, and atomically renamed into place before becoming visible. Run **one server process per data file**. A malformed existing data file causes startup to fail without overwriting it. Back up `data.json` to preserve your team's progress.
 
 ## Use
@@ -59,6 +61,8 @@ IDs are deterministic FNV-1a 128-bit hashes of the UTF-8 JSON tuple `[category, 
 
 API responses are JSON. The frontend is served at `/` (or `/index.html`), `/styles.css`, and `/app.js`. Errors use an appropriate HTTP status and `{ "error": "message" }`.
 
+Every GET endpoint also supports HEAD, returning the same status and headers (including Content-Length) with an empty body. This supports hosting health checks and uptime monitors without downloading the page or task list. HEAD never changes task data.
+
 ```text
 GET /api/tasks
   -> { tasks: [{ id, title, category, status, owner, updatedAt }], updatedAt }
@@ -82,4 +86,4 @@ Intended for a trusted team LAN/VPN: there are deliberately no passwords, accoun
 
 ## Check
 
-With the dashboard stopped, run `node test.js`. This uses a disposable data directory and port 8000 to verify frontend asset serving, API validation, imports, state changes, concurrent writes, atomic save failure recovery, restart persistence, and frontend syntax. Keep `server.js` and the `public` directory together when copying the app.
+Run `node test.js`. This uses a disposable data directory and an automatically assigned port to verify HEAD responses, frontend asset serving, API validation, imports, state changes, concurrent writes, atomic save failure recovery, restart persistence, and frontend syntax. Your running dashboard can stay open. Keep `server.js` and the `public` directory together when copying the app.
